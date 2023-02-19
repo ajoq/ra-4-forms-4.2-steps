@@ -1,0 +1,10 @@
+.action {
+    padding: 0;
+}
+
+.action-btn {
+    padding: 8px 12px;
+    cursor: pointer;
+    border: none;
+    background-color: inherit;
+}

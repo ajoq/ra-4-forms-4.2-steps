@@ -1,75 +1,124 @@
+import { useState } from 'react';
+import { nanoid } from 'nanoid';
+import dayjs from 'dayjs';
+import StepsForm from '../StepsForm';
+import StepsList from '../StepsList';
 import './index.css';
 
+const initialSteps = [
+    {
+        id: 1,
+        date: dayjs('2023-02-02'),
+        distance: 5.7,
+    },
+    {
+        id: 2,
+        date: dayjs('2023-01-24'),
+        distance: 14.2,
+    },
+    {
+        id: 3,
+        date: dayjs('2023-02-13'),
+        distance: 3.4,
+    },
+];
+
 function Steps() {
+    const sortDate = (a, b) => b.date - a.date;
+    const isitialStepsSort = [...initialSteps];
+    isitialStepsSort.sort(sortDate);
+
+    const [steps, setSteps] = useState(isitialStepsSort);
+    const [form, setForm] = useState({ date: '', distance: '' });
+
+    const handleFormChange = (evt) => {
+        const { name, value } = evt.target;
+
+        setForm((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
+    const handleAddStep = (evt) => {
+        evt.preventDefault();
+
+        const isDateExist = steps.some((item) =>
+            item.date.isSame(dayjs(form.date))
+        );
+
+        if (isDateExist) {
+            setSteps(
+                steps.map((item) => {
+                    if (item.date.isSame(dayjs(form.date))) {
+                        return {
+                            ...item,
+                            distance: +item.distance + +form.distance,
+                        };
+                    } else {
+                        return item;
+                    }
+                })
+            );
+        } else {
+            const newSteps = [
+                ...steps,
+                {
+                    id: nanoid(),
+                    date: dayjs(form.date),
+                    distance: form.distance,
+                },
+            ];
+
+            newSteps.sort(sortDate);
+            setSteps(newSteps);
+        }
+
+        setForm({ date: '', distance: '' });
+    };
+
+    const handleChangeStep = (nextStep) => {
+        setSteps(
+            steps.map((item) => {
+                if (item.id === nextStep.id) {
+                    return nextStep;
+                } else {
+                    return item;
+                }
+            })
+        );
+    };
+
+    const handleRemoveStep = (id) => {
+        setSteps(steps.filter((item) => item.id != id));
+    };
+
     return (
-        <>
-            <div className="steps">
-                <div className="steps-form">
-                    <form className="form">
-                        <div className="form-item">
-                            <label className="form-lable" htmlFor="date">
-                                Дата (ДД.ММ.ГГ)
-                            </label>
-                            <input
-                                className="form-input"
-                                name="date"
-                                type="date"
-                            />
-                        </div>
-                        <div className="form-item input-distance">
-                            <label className="form-lable" htmlFor="distance">
-                                Пройдено км
-                            </label>
-                            <input
-                                className="form-input"
-                                name="distance"
-                                type="number"
-                            />
-                        </div>
-                        <div className="form-item submit">
-                            <button className="submit-btn">ОК</button>
-                        </div>
-                    </form>
-                </div>
-                <div className="steps-table">
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Дата (ДД.ММ.ГГ)</th>
-                                <th>Пройдено км</th>
-                                <th>Действия</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>13.02.2023</td>
-                                <td>5.7</td>
-                                <td className="actions">
-                                    <span className="edit">✎</span>
-                                    <span className="remove">✘</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>12.02.2023</td>
-                                <td>14.2</td>
-                                <td className="actions">
-                                    <span className="edit">✎</span>
-                                    <span className="remove">✘</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>11.02.2023</td>
-                                <td>3.4</td>
-                                <td className="actions">
-                                    <span className="edit">✎</span>
-                                    <span className="remove">✘</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <div className="steps">
+            <StepsForm
+                form={form}
+                onAddStep={handleAddStep}
+                onFormChange={handleFormChange}
+            />
+            <div className="steps-table">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>Пройдено км</th>
+                            <th colSpan={2}>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <StepsList
+                            steps={steps}
+                            onChangeStep={handleChangeStep}
+                            onRemoveStep={handleRemoveStep}
+                        />
+                    </tbody>
+                </table>
             </div>
-        </>
+        </div>
     );
 }
 

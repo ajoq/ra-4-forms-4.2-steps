@@ -3,40 +3,10 @@
     display: inline-block;
 }
 
-.form {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: flex-end;
-    margin-bottom: 20px;
-}
-
-.form-item {
-    margin-right: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.form-item:last-child {
-    margin-right: 0;
-}
-
-.form-lable {
-    margin-bottom: 10px;
-}
-
 .form-input {
     padding: 6px 12px;
     border: 1px solid #dee2e6;
     border-radius: 6px;
-}
-
-.submit-btn {
-    padding: 6px 24px;
-    border: 1px solid #dee2e6;
-    border-radius: 6px;
-    cursor: pointer;
 }
 
 .table {
@@ -52,13 +22,4 @@
 table td {
     padding: 8px;
     border-bottom: 1px solid #dee2e6;
-}
-
-.actions {
-    padding: 0;
-}
-
-.actions span {
-    padding: 8px 12px;
-    cursor: pointer;
 }
