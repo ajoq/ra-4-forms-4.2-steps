@@ -1,4 +1,4 @@
-GH pages: GH pages: https://ajoq.github.io/ra-4-forms-4.2-steps
+GH pages: https://ajoq.github.io/ra-4-forms-4.2-steps
 
 # Учёт тренировок
 
