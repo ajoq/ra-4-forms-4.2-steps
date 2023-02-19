@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ra-4-forms-4.2-steps/static/css/main.56c1dc27.css",
+    "main.js": "/ra-4-forms-4.2-steps/static/js/main.31072174.js",
+    "index.html": "/ra-4-forms-4.2-steps/index.html",
+    "main.56c1dc27.css.map": "/ra-4-forms-4.2-steps/static/css/main.56c1dc27.css.map",
+    "main.31072174.js.map": "/ra-4-forms-4.2-steps/static/js/main.31072174.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.56c1dc27.css",
+    "static/js/main.31072174.js"
+  ]
+}
