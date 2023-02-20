@@ -100,24 +100,11 @@ function Steps() {
                 onAddStep={handleAddStep}
                 onFormChange={handleFormChange}
             />
-            <div className="steps-table">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Дата</th>
-                            <th>Пройдено км</th>
-                            <th colSpan={2}>Действия</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <StepsList
-                            steps={steps}
-                            onChangeStep={handleChangeStep}
-                            onRemoveStep={handleRemoveStep}
-                        />
-                    </tbody>
-                </table>
-            </div>
+            <StepsList
+                steps={steps}
+                onChangeStep={handleChangeStep}
+                onRemoveStep={handleRemoveStep}
+            />
         </div>
     );
 }

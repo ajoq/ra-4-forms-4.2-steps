@@ -9,7 +9,7 @@ function Step({ step, onChange, onRemove }) {
     if (isEditing) {
         editStepContent = (
             <>
-                <td>
+                <td className="change">
                     <input
                         className="form-input"
                         name="distance"
